@@ -54,20 +54,20 @@ let serve = () => {
 let compressHTML = () => {
     return src([`./dev/html/*.html`])
         .pipe(htmlCompressor({collapseWhitespace: true}))
-        .pipe(dest(`prod`));
+        .pipe(dest(`prod/html`));
 };
 
 let transpileJSForProd = () => {
     return src(`./dev/js/*.js`)
         .pipe(babel())
         .pipe(jsCompressor())
-        .pipe(dest(`prod/scripts`));
+        .pipe(dest(`prod/js`));
 };
 
 let compressCSS = () => {
     return src([`./dev/css/*.css`])
         .pipe(cssCompressor({compatibility: `ie8`}))
-        .pipe(dest(`prod/styles`));
+        .pipe(dest(`prod/css`));
 };
 
 exports.lintCSS = lintCSS;
