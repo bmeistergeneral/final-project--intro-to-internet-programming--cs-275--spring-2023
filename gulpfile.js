@@ -9,7 +9,7 @@ const { src, dest, series, watch } = require(`gulp`),
     cssCompressor = require(`gulp-clean-css`);
 
 let lintCSS = () => {
-    return src(`./styles/*.css`)
+    return src(`./dev/css/style.css`)
         .pipe(CSSLinter({
             failAfterError: false,
             reporters: [
@@ -19,13 +19,13 @@ let lintCSS = () => {
 };
 
 let lintJS = () => {
-    return src(`./scripts/*.js`)
+    return src(`./dev/js/*.js`)
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`));
 };
 
 let transpileJSForDev = () => {
-    return src(`./scripts/*.js`)
+    return src(`./dev/js/*.js`)
         .pipe(babel())
         .pipe(dest(`temp/scripts`));
 };
@@ -36,36 +36,36 @@ let serve = () => {
         reloadDelay: 50,
         server: {
             baseDir: [
-                `./`
+                `./dev/html/`
             ]
         }
     });
 
-    watch(`./styles/*.css`, series(lintCSS))
+    watch(`./dev/css/*.css`, series(lintCSS))
         .on(`change`, reload);
 
-    watch(`./scripts/*.js`, series(lintJS, transpileJSForDev))
+    watch(`./dev/js/*.js`, series(lintJS, transpileJSForDev))
         .on(`change`, reload);
 
-    watch(`./*.html`)
+    watch(`./dev/html/*.html`)
         .on(`change`, reload);
 };
 
 let compressHTML = () => {
-    return src([`./*.html`])
+    return src([`./dev/html/*.html`])
         .pipe(htmlCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod`));
 };
 
 let transpileJSForProd = () => {
-    return src(`./scripts/*.js`)
+    return src(`./dev/js/*.js`)
         .pipe(babel())
         .pipe(jsCompressor())
         .pipe(dest(`prod/scripts`));
 };
 
 let compressCSS = () => {
-    return src([`./styles/*.css`])
+    return src([`./dev/css/*.css`])
         .pipe(cssCompressor({compatibility: `ie8`}))
         .pipe(dest(`prod/styles`));
 };
