@@ -18,6 +18,30 @@ window.onload = () => {
     }
   }
 
-  alert(matrixSize);
+  let originalMatrix = document.getElementById("original-matrix");
+
+  let table = document.createElement("table");
+  originalMatrix.appendChild(table);
+
+  let tableBody = document.createElement("tbody");
+  table.appendChild(tableBody);
+
+  let value = 0;
+
+  for (let i = 0; i < matrixSize; i++) {
+    
+    let row = document.createElement("tr");
+    
+    for (let j = 0; j < matrixSize; j++) {
+      value += 1;
+      let cell = document.createElement("td");
+      let cellText = document.createTextNode(value);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+    }
+
+    tableBody.appendChild(row);
+  }
+  
 };
 
