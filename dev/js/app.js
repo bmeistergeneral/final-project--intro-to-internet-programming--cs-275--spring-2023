@@ -27,17 +27,16 @@ window.onload = () => {
     let tableBody = document.createElement(`tbody`);
     table.appendChild(tableBody);
 
-    let value = 0;
-
     for (let i = 0; i < matrixSize; i++) {
     
         let row = document.createElement(`tr`);
     
         for (let j = 0; j < matrixSize; j++) {
 
-            value += 1;
+            let value = (i * matrixSize) + (j + 1);
             let cell = document.createElement(`td`);
 
+            // This means it's on the secondary diagonal.
             if ((i + j) == (matrixSize - 1)) {
                 cell.classList.add(`highlighted`);
             }
@@ -58,25 +57,28 @@ window.onload = () => {
     let reverseTableBody = document.createElement(`tbody`);
     reverseTable.appendChild(reverseTableBody);
 
-    let reverseValue = matrixSize * matrixSize;
-
     for (let i = 0; i < matrixSize; i++) {
     
         let row = document.createElement(`tr`);
     
         for (let j = 0; j < matrixSize; j++) {
 
+            let value = (i * matrixSize) + (j + 1);
+            let reverseValue = (matrixSize * matrixSize) - value + 1;
+
             let cell = document.createElement(`td`);
 
+            // This means it's on the secondary diagonal.
             if ((i + j) == (matrixSize - 1)) {
                 cell.classList.add(`highlighted`);
+                let cellText = document.createTextNode(value);
+                cell.appendChild(cellText);
+            } else {
+                let cellText = document.createTextNode(reverseValue);
+                cell.appendChild(cellText);
             }
       
-            let cellText = document.createTextNode(reverseValue);
-            cell.appendChild(cellText);
             row.appendChild(cell);
-
-            reverseValue -= 1;
         }
 
         reverseTableBody.appendChild(row);
