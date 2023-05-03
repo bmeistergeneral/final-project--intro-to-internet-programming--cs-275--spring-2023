@@ -33,6 +33,7 @@ window.onload = () => {
     let row = document.createElement("tr");
     
     for (let j = 0; j < matrixSize; j++) {
+
       value += 1;
       let cell = document.createElement("td");
 
@@ -46,6 +47,38 @@ window.onload = () => {
     }
 
     tableBody.appendChild(row);
+  }
+
+  let reverseMatrix = document.getElementById("flipped-matrix");
+
+  let reverseTable = document.createElement("table");
+  reverseMatrix.appendChild(reverseTable);
+
+  let reverseTableBody = document.createElement("tbody");
+  reverseTable.appendChild(reverseTableBody);
+
+  let reverseValue = matrixSize * matrixSize;
+
+  for (let i = 0; i < matrixSize; i++) {
+    
+    let row = document.createElement("tr");
+    
+    for (let j = 0; j < matrixSize; j++) {
+
+      let cell = document.createElement("td");
+
+      if ((i + j) == (matrixSize - 1)) {
+        cell.classList.add("highlighted");
+      }
+      
+      let cellText = document.createTextNode(reverseValue);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+
+      reverseValue -= 1;
+    }
+
+    reverseTableBody.appendChild(row);
   }
 
 };
