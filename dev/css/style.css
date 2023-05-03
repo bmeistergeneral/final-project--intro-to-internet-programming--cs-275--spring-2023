@@ -39,3 +39,8 @@ td {
   border: 1px solid black;
   padding: 6px;
 }
+
+.highlighted {
+  background-color: yellow;
+  color: red;
+}

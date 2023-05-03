@@ -35,6 +35,11 @@ window.onload = () => {
     for (let j = 0; j < matrixSize; j++) {
       value += 1;
       let cell = document.createElement("td");
+
+      if ((i + j) == (matrixSize - 1)) {
+        cell.classList.add("highlighted");
+      }
+      
       let cellText = document.createTextNode(value);
       cell.appendChild(cellText);
       row.appendChild(cell);
@@ -42,6 +47,6 @@ window.onload = () => {
 
     tableBody.appendChild(row);
   }
-  
+
 };
 
