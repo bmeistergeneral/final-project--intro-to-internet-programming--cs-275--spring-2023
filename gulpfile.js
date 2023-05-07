@@ -35,9 +35,8 @@ let serve = () => {
         notify: true,
         reloadDelay: 50,
         server: {
-            baseDir: [
-                `./dev/html/`
-            ]
+            baseDir: `./dev/`,
+            index: `./html/index.html`
         }
     });
 
